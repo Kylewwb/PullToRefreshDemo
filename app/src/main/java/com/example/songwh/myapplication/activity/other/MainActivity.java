@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.songwh.myapplication.R;
+import com.example.songwh.myapplication.db.MyDatabaseHelper;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -28,14 +29,19 @@ public class MainActivity extends AppCompatActivity {
     private PullToRefreshListView ptrListView;
     private List<String> mList;
     private ArrayAdapter<String> adapter;
-    private Button btn1;
+    private Button btn1,btn2;
     private Handler handler;
     private String password = "sdfsdf";
+    private MyDatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn1 = (Button) findViewById(R.id.btn1);
+        btn2 = (Button) findViewById(R.id.btn2);
+
+        dbHelper = new MyDatabaseHelper(this,"BookStore.db",null,1);//创建对象
+
         ptrListView = (PullToRefreshListView) findViewById(R.id.ptrListView);
         handler = new Handler();
         //刷新布局个性化定制
@@ -61,6 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                btn2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dbHelper.getWritableDatabase();
+                    }
+                });
+            }
+        }).start();
+
     }
 
     private void initData() {
