@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         SystemClock.sleep(2000);
                         for (int i = 0;i<5;i++){
-                            mList.add(1,"xinshuj "+i);//记得更改
+                            mList.add(0,"新加的数据 "+i);//记得更改
 
                         }
                         handler.post(new Runnable() {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         SystemClock.sleep(2000);
                         for (int i = 0;i<5;i++){
-                            mList.add("xinshuj "+i);//记得更改
+                            mList.add("新加的数据 "+i);//记得更改
 
                         }
                         handler.post(new Runnable() {
