@@ -1,12 +1,16 @@
 package com.example.songwh.myapplication.activity.other;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.songwh.myapplication.R;
@@ -24,19 +28,39 @@ public class MainActivity extends AppCompatActivity {
     private PullToRefreshListView ptrListView;
     private List<String> mList;
     private ArrayAdapter<String> adapter;
-
+    private Button btn1;
     private Handler handler;
-
+    private String password = "sdfsdf";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btn1 = (Button) findViewById(R.id.btn1);
         ptrListView = (PullToRefreshListView) findViewById(R.id.ptrListView);
         handler = new Handler();
         //刷新布局个性化定制
         init_ptrListView_LoadingLayout();
         //加载数据
         initData();
+
+        SharedPreferences.Editor editor = getSharedPreferences("data",MODE_PRIVATE).edit();
+        editor.putString("name","wwb");
+        editor.putString("password",password);
+        editor.putBoolean("married",false);
+        editor.apply();
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
+                String name = pref.getString("name","");
+                String password = pref.getString("password","");
+                Boolean married = pref.getBoolean("married",false);
+                Log.i("MainActivity","name is"+name);
+                Log.i("MainActivity","password is"+password);
+                Log.i("MainActivity","married is"+married);
+
+            }
+        });
     }
 
     private void initData() {
