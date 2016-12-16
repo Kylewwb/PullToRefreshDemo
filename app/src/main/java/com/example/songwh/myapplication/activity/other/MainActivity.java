@@ -158,6 +158,6 @@ public class MainActivity extends AppCompatActivity {
         //设置加载时动画
 
         loadingLayoutProxy.setLoadingDrawable(drawable);
-
+        ptrListView.setShowIndicator(false);//取消上下小箭头的标志
     }
 }
