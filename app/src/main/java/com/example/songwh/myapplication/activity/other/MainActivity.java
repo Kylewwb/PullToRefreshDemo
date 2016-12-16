@@ -24,7 +24,7 @@ import com.yolanda.nohttp.rest.Request;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+//测试demo。
 public class MainActivity extends AppCompatActivity {
     private PullToRefreshListView ptrListView;
     private List<String> mList;
